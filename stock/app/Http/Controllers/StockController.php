@@ -87,8 +87,11 @@ class StockController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $stock = Stock::find($id);
+        $stock->delete(); // Easy right?
+    
+        return redirect('/stocks');  // -> resources/views/stocks/index.blade.php
+    } 
 }

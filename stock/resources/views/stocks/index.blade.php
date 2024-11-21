@@ -22,6 +22,7 @@
             <th>Stock Value</th>
             <th>Updated at</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
       </thead>
       <tbody>
@@ -33,6 +34,12 @@
               <td>{{$stock->value}}</td>
               <td>{{$stock->updated_at}}</td>
               <td><a href="/stocks/edit/{{$stock->id}}" class="btn btn-primary">Edit</a></td>
+              <td>
+  <form action="/stocks/destroy/{{$stock->id}}" method="post">
+    @csrf
+    <button onclick="return confirm('Are you sure?')" class="btn btn-danger" type="submit">Delete</button>
+  </form>
+</td>
           </tr>
           @endforeach
       </tbody>
