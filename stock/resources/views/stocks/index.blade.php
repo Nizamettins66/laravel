@@ -1,6 +1,7 @@
 @extends('base')
 @section('title', 'List of Stocks')
 @section('content')
+@php( $sum=0 )
   <div>
     <a href="/stocks/create" class="btn btn-primary mb-3">Add Stock</a>
   </div>     
@@ -19,11 +20,12 @@
     </thead>
     <tbody>
         @foreach($stocks as $stock)
+        @php( $sum+=$stock->value )
         <tr>
             <td>{{$stock->id}}</td>
             <td>{{$stock->stock_name}} </td>
             <td>{{$stock->ticket}}</td>
-            <td>{{$stock->value}}</td>
+            <td>€{{ number_format($stock->value, 2, ',', '.')}}</td>
             <td>{{$stock->updated_at}}</td>
             <td><a href="/stocks/edit/{{$stock->id}}" class="btn btn-primary">Edit</a></td>
             <td>
@@ -34,6 +36,13 @@
           </td>
         </tr>
         @endforeach
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>€{{ number_format($sum, 2, ',', '.')}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tbody>
   </table>
 @endsection
